@@ -16,8 +16,11 @@ void PauseScene::Begin()
 	_MenuMoveSFX.loadFromFile("MenuMove.wav");
 	_MenuSelectSFX.loadFromFile("MenuSelect.wav");
 
-	if (_Window == 0 )
+	if (_Window == 0)
+	{
+		_Window = new sf::RenderWindow();
 		_Window->create(sf::VideoMode(624, 624), "Tic-Tac-Toe");
+	}
 
 	_MenuChoice = 0;
 };
@@ -70,7 +73,7 @@ void PauseScene::Update(float dt)
 			default:
 				break;
 			}
-			if (_Player.getStatus() != sf::Sound::Playing)
+			if ((_Player.getStatus() != sf::Sound::Playing) && (Config::C()->_SFXOn))
 				_Player.play();
 		}
 	}
@@ -94,12 +97,12 @@ void PauseScene::DrawScreen()
 	pauseText.setPosition((_Window->getSize().x - pauseText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) - 100.f);
 	_Window->draw(pauseText);
 
-	sf::Text resumeText;
-	resumeText.setString("Resume");
-	resumeText.setFont(_Font);
-	if (_MenuChoice == 0) resumeText.setStyle(sf::Text::Underlined);
-	resumeText.setPosition((_Window->getSize().x - resumeText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) - 50.f);
-	_Window->draw(resumeText);
+	sf::Text MusicText;
+	MusicText.setString("Resume");
+	MusicText.setFont(_Font);
+	if (_MenuChoice == 0) MusicText.setStyle(sf::Text::Underlined);
+	MusicText.setPosition((_Window->getSize().x - MusicText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) - 50.f);
+	_Window->draw(MusicText);
 
 	sf::Text restartText;
 	restartText.setString("Restart");

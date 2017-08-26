@@ -1,1 +1,1 @@
-Add config file (setting pieces, SFX and music)
+Add AI

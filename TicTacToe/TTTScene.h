@@ -5,6 +5,7 @@
 #include "Utility.h"
 #include "Scene.h"
 #include "PauseScene.h"
+#include "Config.h"
 
 class TTTScene : public Scene
 {

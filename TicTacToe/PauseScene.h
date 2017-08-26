@@ -6,6 +6,7 @@
 
 #include "Scene.h"
 #include "TTTScene.h"
+#include "Config.h"
 
 class PauseScene : public Scene
 {

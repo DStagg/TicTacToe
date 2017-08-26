@@ -25,7 +25,9 @@ void MenuScene::Begin()
 	if (!_Music.openFromFile("Paradox.ogg"))
 		std::cout << "Paradox.ogg failed to load!" << std::endl;
 	_Music.setVolume(25.f);
-	_Music.play();
+
+	if (Config::C()->_MusicOn)
+		_Music.play();
 };
 void MenuScene::End()
 {
@@ -37,7 +39,8 @@ void MenuScene::Pause()
 };
 void MenuScene::Resume()
 {
-	
+	if (!Config::C()->_MusicOn) _Music.stop();
+	else if (_Music.getStatus() != sf::Music::Playing) _Music.play();
 };
 void MenuScene::Update(float dt)
 {
@@ -65,13 +68,13 @@ void MenuScene::Update(float dt)
 			case sf::Keyboard::Return:
 				_Player.setBuffer(_MenuSelectSFX); 
 				if (_MenuChoice == 0) GetManager()->PushScene(new TTTScene(_Window));
-				//else if (_MenuChoice == 1) // Config Menu
+				else if (_MenuChoice == 1) GetManager()->PushScene(new ConfigScene(_Window, &_Music));
 				else if (_MenuChoice == 2) SetRunning(false);
 				break;
 			default:
 				break;
 			}
-			if (_Player.getStatus() != sf::Sound::Playing)
+			if ((_Player.getStatus() != sf::Sound::Playing) && (Config::C()->_SFXOn))
 				_Player.play();
 		}
 	}

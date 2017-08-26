@@ -1,21 +1,17 @@
-#ifndef MENUSCENE_H
-#define MENUSCENE_H
+#ifndef CONFIGSCENE_H
+#define CONFIGSCENE_H
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-
 #include "Scene.h"
-#include "TTTScene.h"
-
 #include "Config.h"
-#include "ConfigScene.h"
 
-class MenuScene : public Scene
+class ConfigScene : public Scene
 {
 public:
 
-	MenuScene(sf::RenderWindow* win = 0);
-	~MenuScene();
+	ConfigScene(sf::RenderWindow* win = 0, sf::Music* bgm = 0);
+	~ConfigScene();
 
 	void Begin();
 	void End();
@@ -26,14 +22,16 @@ public:
 
 private:
 
-	sf::Font _Font;
 	sf::RenderWindow* _Window;
 	int _MenuChoice;
+	
+	sf::Music* _BackgroundMusic;
 
 	sf::SoundBuffer _MenuMoveSFX;
 	sf::SoundBuffer _MenuSelectSFX;
-	sf::Music _Music;
 	sf::Sound _Player;
+
+	sf::Font _Font;
 };
 
 #endif

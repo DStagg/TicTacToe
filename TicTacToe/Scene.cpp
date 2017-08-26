@@ -87,7 +87,10 @@ void SceneManager::CullScenes()
 			if (newActive == 0)
 				_RootScenePntr = 0;
 			else
+			{
 				newActive->SetChild(0);
+				newActive->Resume();
+			}
 		}
 		else
 			break;

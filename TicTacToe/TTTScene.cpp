@@ -91,7 +91,7 @@ void TTTScene::Update(float dt)
 				_Cells[col][row] = (_PlayerTurn) ? 1 : 2;
 				_PlayerTurn = !_PlayerTurn;
 				_Player.setBuffer(_PlaceSFX);
-				if ( _Player.getStatus() != sf::Sound::Playing) _Player.play();
+				if (( _Player.getStatus() != sf::Sound::Playing) && (Config::C()->_SFXOn)) _Player.play();
 			}
 		}
 		else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::R))
@@ -109,7 +109,7 @@ void TTTScene::Update(float dt)
 		_Player.stop();
 		if (CheckForWin() == 3) _Player.setBuffer(_DrawSFX);
 		else _Player.setBuffer(_VictorySFX);
-		_Player.play();
+		if ( Config::C()->_SFXOn ) _Player.play();
 		_Done = true;
 	}
 	
