@@ -27,6 +27,12 @@
     <ClCompile Include="TTTScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MenuScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -38,5 +44,14 @@
     <ClInclude Include="TTTScene.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseScene.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ToDo.txt" />
   </ItemGroup>
 </Project>

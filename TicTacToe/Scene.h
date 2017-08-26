@@ -48,6 +48,8 @@ public:
 
 	void CullScenes();
 
+	void Quit(int i = -1);
+
 	Scene* GetActiveScenePntr();
 
 	Scene* GetRootScenePntr();

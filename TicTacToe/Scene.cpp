@@ -94,6 +94,19 @@ void SceneManager::CullScenes()
 	}
 };
 
+void SceneManager::Quit(int i)
+{
+	Scene* curr = GetActiveScenePntr();
+	while (curr != 0)
+	{
+		if (i == 0)
+			break;
+		i -= 1;
+		curr->SetRunning(false);
+		curr = curr->GetParent();
+	}
+};
+
 Scene* SceneManager::GetActiveScenePntr()
 {
 	if (_RootScenePntr == 0)

@@ -4,12 +4,13 @@
 #include <SFML\Graphics.hpp>
 #include "Utility.h"
 #include "Scene.h"
+#include "PauseScene.h"
 
 class TTTScene : public Scene
 {
 public:
 
-	TTTScene();
+	TTTScene(sf::RenderWindow* win = 0);
 	~TTTScene();
 
 	void Begin();
@@ -27,7 +28,7 @@ private:
 	float _TurnDelay = 0.5f;
 	bool _PlayerTurn;
 
-	sf::RenderWindow _Window;
+	sf::RenderWindow* _Window;
 	sf::Texture _X;
 	sf::Texture _O;
 	sf::Font _Font;

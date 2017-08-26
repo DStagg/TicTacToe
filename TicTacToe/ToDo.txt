@@ -1,0 +1,3 @@
+Add sounds (menu select, menu change, place piece, victory, draw)
+Add background music
+Add config file (setting pieces, SFX and music)

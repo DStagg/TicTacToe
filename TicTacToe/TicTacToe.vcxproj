@@ -119,14 +119,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuScene.cpp" />
+    <ClCompile Include="PauseScene.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TTTScene.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MenuScene.h" />
+    <ClInclude Include="PauseScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="TTTScene.h" />
     <ClInclude Include="Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ToDo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
