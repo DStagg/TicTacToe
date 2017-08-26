@@ -47,6 +47,8 @@ void TTTScene::Begin()
 		_Window = new sf::RenderWindow();
 		_Window->create(sf::VideoMode(width, height), "Tic-Tac-Toe");
 	}
+
+	_AI = new EasyAI();
 };
 void TTTScene::End()
 {
@@ -64,44 +66,54 @@ void TTTScene::Update(float dt)
 {
 	_DelayTimer += dt;
 
-	sf::Event Event;
-	while (_Window->pollEvent(Event))
+	if (_PlayerTurn)
 	{
-		if (Event.type == sf::Event::Closed)
+		sf::Event Event;
+		while (_Window->pollEvent(Event))
 		{
-			GetManager()->Quit();
-		}
-		else if ((Event.type == sf::Event::MouseButtonPressed) && (Event.mouseButton.button == sf::Mouse::Left) )
-		{
-			if (CheckForWin())
-				break;
-
-			if (_DelayTimer < _TurnDelay)
-				break;
-
-			_DelayTimer = 0.f;
-			int col = (sf::Mouse::getPosition(*_Window).x - _XMargin) / (_XBuffer + _X.getSize().x);
-			int row = (sf::Mouse::getPosition(*_Window).y - _YMargin) / (_YBuffer + _X.getSize().y);
-
-			if ((col < 0) || (col >= 3) || (row < 0) || (row >= 3))
-				break;
-
-			if (_Cells[col][row] == 0)
+			if (Event.type == sf::Event::Closed)
 			{
-				_Cells[col][row] = (_PlayerTurn) ? 1 : 2;
-				_PlayerTurn = !_PlayerTurn;
-				_Player.setBuffer(_PlaceSFX);
-				if (( _Player.getStatus() != sf::Sound::Playing) && (Config::C()->_SFXOn)) _Player.play();
+				GetManager()->Quit();
+			}
+			else if ((Event.type == sf::Event::MouseButtonPressed) && (Event.mouseButton.button == sf::Mouse::Left))
+			{
+				if (CheckForWin())
+					break;
+
+				if (_DelayTimer < _TurnDelay)
+					break;
+
+				_DelayTimer = 0.f;
+				int col = (sf::Mouse::getPosition(*_Window).x - _XMargin) / (_XBuffer + _X.getSize().x);
+				int row = (sf::Mouse::getPosition(*_Window).y - _YMargin) / (_YBuffer + _X.getSize().y);
+
+				if ((col < 0) || (col >= 3) || (row < 0) || (row >= 3))
+					break;
+
+				if (_Cells[col][row] == 0)
+				{
+					_Cells[col][row] = (_PlayerTurn) ? 1 : 2;
+					_PlayerTurn = !_PlayerTurn;
+					_Player.setBuffer(_PlaceSFX);
+					if ((_Player.getStatus() != sf::Sound::Playing) && (Config::C()->_SFXOn)) _Player.play();
+				}
+			}
+			else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::R))
+			{
+				Refresh();
+			}
+			else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
+			{
+				GetManager()->PushScene(new PauseScene(_Window));
 			}
 		}
-		else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::R))
-		{
-			Refresh();
-		}
-		else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
-		{
-			GetManager()->PushScene(new PauseScene(_Window));
-		}
+	}
+	else
+	{
+		//	Where the AI acts
+
+
+
 	}
 
 	if ((!_Done)&& (CheckForWin() != 0))

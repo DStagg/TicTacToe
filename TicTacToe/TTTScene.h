@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "PauseScene.h"
 #include "Config.h"
+#include "AI.h"
 
 class TTTScene : public Scene
 {
@@ -48,6 +49,8 @@ private:
 	sf::Sound _Player;
 
 	bool _Done;
+
+	AI* _AI;
 
 };
 
