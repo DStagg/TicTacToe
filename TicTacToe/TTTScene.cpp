@@ -33,8 +33,14 @@ void TTTScene::Begin()
 
 	_Font.loadFromFile("Roboto-Regular.ttf");
 
+	_PlaceSFX.loadFromFile("Place.wav");
+	_VictorySFX.loadFromFile("Victory.wav");
+	_DrawSFX.loadFromFile("Draw.wav");
+
 	int width = (_XMargin * 2) + (_XBuffer * 4) + (_X.getSize().x * 3 );
 	int height = (_YMargin * 2) + (_YBuffer * 4) + (_X.getSize().y * 3);
+
+	_Done = false;
 
 	if (_Window == 0)
 	{
@@ -84,20 +90,29 @@ void TTTScene::Update(float dt)
 			{
 				_Cells[col][row] = (_PlayerTurn) ? 1 : 2;
 				_PlayerTurn = !_PlayerTurn;
+				_Player.setBuffer(_PlaceSFX);
+				if ( _Player.getStatus() != sf::Sound::Playing) _Player.play();
 			}
 		}
 		else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::R))
 		{
-			for (int x = 0; x < 3; x++)
-				for (int y = 0; y < 3; y++)
-					_Cells[x][y] = 0;
-			_PlayerTurn = true;
+			Refresh();
 		}
 		else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 		{
 			GetManager()->PushScene(new PauseScene(_Window));
 		}
 	}
+
+	if ((!_Done)&& (CheckForWin() != 0))
+	{
+		_Player.stop();
+		if (CheckForWin() == 3) _Player.setBuffer(_DrawSFX);
+		else _Player.setBuffer(_VictorySFX);
+		_Player.play();
+		_Done = true;
+	}
+	
 
 };
 void TTTScene::DrawScreen()
@@ -188,4 +203,13 @@ int TTTScene::CheckForWin()
 				return 0;	//	Ongoing
 
 	return 3;	//	Draw
+};
+
+void TTTScene::Refresh()
+{
+	for (int x = 0; x < 3; x++)
+		for (int y = 0; y < 3; y++)
+			_Cells[x][y] = 0;
+	_PlayerTurn = true;
+	_Done = false;
 };

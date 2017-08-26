@@ -14,12 +14,22 @@ void MenuScene::Begin()
 	_Font.loadFromFile("Roboto-Regular.ttf");
 	_MenuChoice = 0;
 
+	if (!_MenuMoveSFX.loadFromFile("MenuMove.wav"))
+		std::cout << "MenuMove.wav failed to load!" << std::endl;
+	if (!_MenuSelectSFX.loadFromFile("MenuSelect.wav"))
+		std::cout << "MenuSelect.wav failed to load!" << std::endl;
+
 	if ( _Window == 0 )
 		_Window->create(sf::VideoMode(624, 624), "Tic-Tac-Toe");
+
+	if (!_Music.openFromFile("Paradox.ogg"))
+		std::cout << "Paradox.ogg failed to load!" << std::endl;
+	_Music.setVolume(25.f);
+	_Music.play();
 };
 void MenuScene::End()
 {
-
+	_Music.stop();
 };
 void MenuScene::Pause()
 {
@@ -45,12 +55,15 @@ void MenuScene::Update(float dt)
 			case sf::Keyboard::Up:
 				_MenuChoice -= 1;
 				if (_MenuChoice < 0) _MenuChoice = 0;
+				_Player.setBuffer(_MenuMoveSFX); 
 				break;
 			case sf::Keyboard::Down:
 				_MenuChoice += 1;
 				if (_MenuChoice > 2) _MenuChoice = 2;
+				_Player.setBuffer(_MenuMoveSFX); 
 				break;
 			case sf::Keyboard::Return:
+				_Player.setBuffer(_MenuSelectSFX); 
 				if (_MenuChoice == 0) GetManager()->PushScene(new TTTScene(_Window));
 				//else if (_MenuChoice == 1) // Config Menu
 				else if (_MenuChoice == 2) SetRunning(false);
@@ -58,6 +71,8 @@ void MenuScene::Update(float dt)
 			default:
 				break;
 			}
+			if (_Player.getStatus() != sf::Sound::Playing)
+				_Player.play();
 		}
 	}
 };

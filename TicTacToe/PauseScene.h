@@ -2,8 +2,10 @@
 #define PAUSESCENE_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "Scene.h"
+#include "TTTScene.h"
 
 class PauseScene : public Scene
 {
@@ -24,6 +26,10 @@ private:
 	int _MenuChoice;
 	sf::RenderWindow* _Window;
 	sf::Font _Font;
+
+	sf::SoundBuffer _MenuMoveSFX;
+	sf::SoundBuffer _MenuSelectSFX;
+	sf::Sound _Player;
 };
 
 #endif

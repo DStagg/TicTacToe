@@ -21,6 +21,7 @@ public:
 	void DrawScreen();
 
 	int CheckForWin();
+	void Refresh();
 
 private:
 
@@ -39,6 +40,13 @@ private:
 	int _YMargin = 100;
 	int _XBuffer = 10;
 	int _YBuffer = 10;
+
+	sf::SoundBuffer _PlaceSFX;
+	sf::SoundBuffer _VictorySFX;
+	sf::SoundBuffer _DrawSFX;
+	sf::Sound _Player;
+
+	bool _Done;
 
 };
 
