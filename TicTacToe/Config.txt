@@ -1,2 +1,3 @@
 Music: Off
 SFX: On
+AI: Medium

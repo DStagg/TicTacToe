@@ -13,6 +13,7 @@ Config::Config()
 {
 	_MusicOn = true;
 	_SFXOn = true;
+	_AILvl = 0;
 
 	if (!LoadFromFile("Config.txt"))
 		SaveToFile("Config.txt");
@@ -36,6 +37,11 @@ bool Config::LoadFromFile(std::string filename)
 	//	SFX On/Off
 	std::getline(file, line);
 	_SFXOn = (line == "SFX: On");
+	//	AI Level
+	std::getline(file, line);
+	if (line == "AI: Easy") _AILvl = 0;
+	else if (line == "AI: Medium") _AILvl = 1;
+	else _AILvl = 2;
 
 	file.close();
 
@@ -55,6 +61,13 @@ bool Config::SaveToFile(std::string filename)
 		file << "SFX: On" << std::endl;
 	else
 		file << "SFX: Off" << std::endl;
+
+	if (_AILvl == 0)
+		file << "AI: Easy" << std::endl;
+	else if (_AILvl == 1)
+		file << "AI: Medium" << std::endl;
+	else
+		file << "AI: Hard" << std::endl;
 
 	file.close();
 

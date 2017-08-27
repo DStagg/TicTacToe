@@ -16,6 +16,7 @@ public:
 
 	bool _MusicOn;
 	bool _SFXOn;
+	int _AILvl;
 
 private:
 

@@ -55,7 +55,7 @@ void ConfigScene::Update(float dt)
 				break;
 			case sf::Keyboard::Down:
 				_MenuChoice += 1;
-				if (_MenuChoice > 2) _MenuChoice = 2;
+				if (_MenuChoice > 3) _MenuChoice = 3;
 				_Player.setBuffer(_MenuMoveSFX);
 				break;
 			case sf::Keyboard::Return:
@@ -69,7 +69,8 @@ void ConfigScene::Update(float dt)
 						_BackgroundMusic->stop();
 				}
 				else if (_MenuChoice == 1) Config::C()->_SFXOn = !Config::C()->_SFXOn;
-				else if (_MenuChoice == 2) GetManager()->Quit(1);
+				else if (_MenuChoice == 2) Config::C()->_AILvl = Config::C()->_AILvl + 1; if (Config::C()->_AILvl > 2) Config::C()->_AILvl = 0;
+				else if (_MenuChoice == 3) GetManager()->Quit(1);
 				break;
 			default:
 				break;
@@ -81,6 +82,12 @@ void ConfigScene::Update(float dt)
 };
 void ConfigScene::DrawScreen()
 {
+	sf::Text titleText;
+	titleText.setString("Config");
+	titleText.setFont(_Font);
+	titleText.setPosition((_Window->getSize().x - titleText.getLocalBounds().width) / 2.f, titleText.getLocalBounds().height);
+	_Window->draw(titleText);
+
 	sf::Text MusicText;
 	if (Config::C()->_MusicOn)
 		MusicText.setString("Music: On");
@@ -101,10 +108,22 @@ void ConfigScene::DrawScreen()
 	SFXText.setPosition((_Window->getSize().x - SFXText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f));
 	_Window->draw(SFXText);
 
+	sf::Text AIText;
+	if (Config::C()->_AILvl == 0)
+		AIText.setString("AI: Easy");
+	else if (Config::C()->_AILvl == 1)
+		AIText.setString("AI: Medium");
+	else
+		AIText.setString("AI: Hard");
+	AIText.setFont(_Font);
+	if (_MenuChoice == 2) AIText.setStyle(sf::Text::Underlined);
+	AIText.setPosition((_Window->getSize().x - AIText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) + 50.f);
+	_Window->draw(AIText);
+
 	sf::Text quitText;
 	quitText.setString("Quit");
 	quitText.setFont(_Font);
-	if (_MenuChoice == 2) quitText.setStyle(sf::Text::Underlined);
-	quitText.setPosition((_Window->getSize().x - quitText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) + 50.f);
+	if (_MenuChoice == 3) quitText.setStyle(sf::Text::Underlined);
+	quitText.setPosition((_Window->getSize().x - quitText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) + 100.f);
 	_Window->draw(quitText);
 };
