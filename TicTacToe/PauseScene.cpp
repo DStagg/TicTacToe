@@ -13,11 +13,8 @@ void PauseScene::Begin()
 {
 	_Font.loadFromFile("Roboto-Regular.ttf");
 
-	std::vector<std::string> list;
-	list.push_back("Resume");
-	list.push_back("Restart");
-	list.push_back("Quit to Menu");
-	_MenuList.Create(list, _Font, false, _Window->getSize().x / 2.f, (_Window->getSize().y / 2.f) - 50.f, SFMLMenuList::Center);
+	_MenuList.Populate({ "Resume","Restart","Quit to Menu" });
+	_MenuList.Format( _Font, _Window->getSize().x / 2.f, (_Window->getSize().y / 2.f) - 50.f, SFMLMenuList::Center);
 	_MenuList.SetBuffers(10.f, 50.f);
 
 	_MenuMoveSFX.loadFromFile("MenuMove.wav");

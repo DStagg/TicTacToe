@@ -9,12 +9,6 @@ MenuList::~MenuList()
 
 };
 
-void MenuList::Create(std::vector<std::string> list, bool loop)
-{
-	Populate(list);
-	SetLoop(loop);
-};
-
 void MenuList::Populate(std::vector<std::string> list)
 {
 	_List = list;
@@ -102,11 +96,9 @@ SFMLMenuList::~SFMLMenuList()
 
 };
 
-void SFMLMenuList::Create(std::vector<std::string> list, sf::Font font, bool loop, float x, float y, int orientation)
+void SFMLMenuList::Format(sf::Font font, float x, float y, int orientation)
 {
-	Populate(list);
 	_Font = font;
-	SetLoop(loop);
 	_X = x;
 	_Y = y;
 	_Orientation = orientation;

@@ -11,8 +11,6 @@ public:
 	MenuList();
 	~MenuList();
 
-	virtual void Create(std::vector<std::string> list, bool loop);
-
 	void Populate(std::vector<std::string> list);
 
 	int GetChoice();
@@ -41,7 +39,7 @@ public:
 	SFMLMenuList();
 	~SFMLMenuList();
 
-	void Create(std::vector<std::string> list, sf::Font font, bool loop = false, float x = 0.f, float y = 0.f, int orientation = SFMLMenuList::Left);
+	void Format(sf::Font font, float x = 0.f, float y = 0.f, int orientation = SFMLMenuList::Left);
 
 	void SetBuffers(float x, float y);
 

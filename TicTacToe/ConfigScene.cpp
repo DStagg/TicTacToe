@@ -20,12 +20,8 @@ void ConfigScene::Begin()
 
 	_Font.loadFromFile("Roboto-regular.ttf");
 
-	std::vector<std::string> list;
-	list.push_back("Music: ");
-	list.push_back("SFX: ");
-	list.push_back("AI: ");
-	list.push_back("Quit");
-	_MenuList.Create(list, _Font, false, (_Window->getSize().x / 2.f), (_Window->getSize().y / 2.f) - 100.f, SFMLMenuList::Center);
+	_MenuList.Populate({ "Music","SFX","AI","Quit" });
+	_MenuList.Format( _Font, (_Window->getSize().x / 2.f), (_Window->getSize().y / 2.f) - 100.f, SFMLMenuList::Center);
 	_MenuList.SetBuffers(10.f, 50.f);
 
 	_MenuMoveSFX.loadFromFile("MenuMove.wav");

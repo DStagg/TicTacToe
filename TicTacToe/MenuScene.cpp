@@ -13,11 +13,8 @@ void MenuScene::Begin()
 {
 	_Font.loadFromFile("Roboto-Regular.ttf");
 
-	std::vector<std::string> list;
-	list.push_back("Play");
-	list.push_back("Config");
-	list.push_back("Quit");
-	_MenuList.Create(list, _Font, false, _Window->getSize().x / 2.f, _Window->getSize().y / 2.f, SFMLMenuList::Center);
+	_MenuList.Populate({ "Play","Config","Quit" });
+	_MenuList.Format(_Font, _Window->getSize().x / 2.f, _Window->getSize().y / 2.f, SFMLMenuList::Center);
 	_MenuList.SetBuffers(10.f, 50.f);
 
 	if (!_MenuMoveSFX.loadFromFile("MenuMove.wav"))
