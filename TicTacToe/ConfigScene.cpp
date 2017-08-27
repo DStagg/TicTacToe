@@ -19,7 +19,15 @@ void ConfigScene::Begin()
 	}
 
 	_Font.loadFromFile("Roboto-regular.ttf");
-	_MenuChoice = 0;
+
+	std::vector<std::string> list;
+	list.push_back("Music: ");
+	list.push_back("SFX: ");
+	list.push_back("AI: ");
+	list.push_back("Quit");
+	_MenuList.Create(list, _Font, false, (_Window->getSize().x / 2.f), (_Window->getSize().y / 2.f) - 100.f, SFMLMenuList::Center);
+	_MenuList.SetBuffers(10.f, 50.f);
+
 	_MenuMoveSFX.loadFromFile("MenuMove.wav");
 	_MenuSelectSFX.loadFromFile("MenuSelect.wav");
 };
@@ -49,29 +57,37 @@ void ConfigScene::Update(float dt)
 			switch (Event.key.code)
 			{
 			case sf::Keyboard::Up:
-				_MenuChoice -= 1;
-				if (_MenuChoice < 0) _MenuChoice = 0;
+				_MenuList.DecChoice();
 				_Player.setBuffer(_MenuMoveSFX);
 				break;
 			case sf::Keyboard::Down:
-				_MenuChoice += 1;
-				if (_MenuChoice > 3) _MenuChoice = 3;
+				_MenuList.IncChoice();
 				_Player.setBuffer(_MenuMoveSFX);
 				break;
 			case sf::Keyboard::Return:
 				_Player.setBuffer(_MenuSelectSFX);
-				if (_MenuChoice == 0)
+				switch (_MenuList.GetChoice())
 				{
+				case 0:
 					Config::C()->_MusicOn = !Config::C()->_MusicOn;
 					if ((_BackgroundMusic != 0) && (Config::C()->_MusicOn))
 						_BackgroundMusic->play();
 					else if ((_BackgroundMusic != 0) && (!Config::C()->_MusicOn))
 						_BackgroundMusic->stop();
+					break;
+				case 1:
+					Config::C()->_SFXOn = !Config::C()->_SFXOn;
+					break;
+				case 2:
+					Config::C()->_AILvl = Config::C()->_AILvl + 1;
+					if (Config::C()->_AILvl > 2) Config::C()->_AILvl = 0;
+					break;
+				case 3:
+					GetManager()->Quit(1);
+					break;
+				default:
+					break;
 				}
-				else if (_MenuChoice == 1) Config::C()->_SFXOn = !Config::C()->_SFXOn;
-				else if (_MenuChoice == 2) Config::C()->_AILvl = Config::C()->_AILvl + 1; if (Config::C()->_AILvl > 2) Config::C()->_AILvl = 0;
-				else if (_MenuChoice == 3) GetManager()->Quit(1);
-				break;
 			default:
 				break;
 			}
@@ -79,6 +95,23 @@ void ConfigScene::Update(float dt)
 				_Player.play();
 		}
 	}
+
+	if (Config::C()->_MusicOn)
+		_MenuList.SetList(0, "Music: On");
+	else
+		_MenuList.SetList(0, "Music: Off");
+
+	if (Config::C()->_SFXOn)
+		_MenuList.SetList(1, "SFX: On");
+	else
+		_MenuList.SetList(1, "SFX: Off");
+
+	if (Config::C()->_AILvl == 0)
+		_MenuList.SetList(2, "AI: Easy");
+	else if (Config::C()->_AILvl == 1)
+		_MenuList.SetList(2, "AI: Medium");
+	else
+		_MenuList.SetList(2, "AI: Hard");
 };
 void ConfigScene::DrawScreen()
 {
@@ -87,7 +120,10 @@ void ConfigScene::DrawScreen()
 	titleText.setFont(_Font);
 	titleText.setPosition((_Window->getSize().x - titleText.getLocalBounds().width) / 2.f, titleText.getLocalBounds().height);
 	_Window->draw(titleText);
+	
+	_MenuList.Draw(_Window);
 
+	/*
 	sf::Text MusicText;
 	if (Config::C()->_MusicOn)
 		MusicText.setString("Music: On");
@@ -126,4 +162,5 @@ void ConfigScene::DrawScreen()
 	if (_MenuChoice == 3) quitText.setStyle(sf::Text::Underlined);
 	quitText.setPosition((_Window->getSize().x - quitText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) + 100.f);
 	_Window->draw(quitText);
+	*/
 };

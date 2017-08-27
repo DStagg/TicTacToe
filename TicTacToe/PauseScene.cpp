@@ -13,6 +13,13 @@ void PauseScene::Begin()
 {
 	_Font.loadFromFile("Roboto-Regular.ttf");
 
+	std::vector<std::string> list;
+	list.push_back("Resume");
+	list.push_back("Restart");
+	list.push_back("Quit to Menu");
+	_MenuList.Create(list, _Font, false, _Window->getSize().x / 2.f, (_Window->getSize().y / 2.f) - 50.f, SFMLMenuList::Center);
+	_MenuList.SetBuffers(10.f, 50.f);
+
 	_MenuMoveSFX.loadFromFile("MenuMove.wav");
 	_MenuSelectSFX.loadFromFile("MenuSelect.wav");
 
@@ -22,7 +29,6 @@ void PauseScene::Begin()
 		_Window->create(sf::VideoMode(624, 624), "Tic-Tac-Toe");
 	}
 
-	_MenuChoice = 0;
 };
 
 void PauseScene::End()
@@ -51,24 +57,30 @@ void PauseScene::Update(float dt)
 			switch (Event.key.code)
 			{
 			case sf::Keyboard::Up:
-				_MenuChoice -= 1;
-				if (_MenuChoice < 0) _MenuChoice = 0;
+				_MenuList.DecChoice();
 				_Player.setBuffer(_MenuMoveSFX);
 				break;
 			case sf::Keyboard::Down:
-				_MenuChoice += 1;
-				if (_MenuChoice > 2) _MenuChoice = 2;
+				_MenuList.IncChoice();
 				_Player.setBuffer(_MenuMoveSFX);
 				break;
 			case sf::Keyboard::Return:
 				_Player.setBuffer(_MenuSelectSFX);
-				if (_MenuChoice == 0) SetRunning(false);
-				else if (_MenuChoice == 1)
+				switch (_MenuList.GetChoice())
 				{
+				case 0:
+					SetRunning(false);
+					break;
+				case 1:
 					((TTTScene*)GetParent())->Refresh();
 					SetRunning(false);
+					break;
+				case 2:
+					GetManager()->Quit(2);
+					break;
+				default:
+					break;
 				}
-				else if (_MenuChoice == 2) GetManager()->Quit(2);
 				break;
 			default:
 				break;
@@ -97,25 +109,6 @@ void PauseScene::DrawScreen()
 	pauseText.setPosition((_Window->getSize().x - pauseText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) - 100.f);
 	_Window->draw(pauseText);
 
-	sf::Text MusicText;
-	MusicText.setString("Resume");
-	MusicText.setFont(_Font);
-	if (_MenuChoice == 0) MusicText.setStyle(sf::Text::Underlined);
-	MusicText.setPosition((_Window->getSize().x - MusicText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) - 50.f);
-	_Window->draw(MusicText);
-
-	sf::Text restartText;
-	restartText.setString("Restart");
-	restartText.setFont(_Font);
-	if (_MenuChoice == 1) restartText.setStyle(sf::Text::Underlined);
-	restartText.setPosition((_Window->getSize().x - restartText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f));
-	_Window->draw(restartText);
-
-	sf::Text quitText;
-	quitText.setString("Quit");
-	quitText.setFont(_Font);
-	if (_MenuChoice == 2) quitText.setStyle(sf::Text::Underlined);
-	quitText.setPosition((_Window->getSize().x - quitText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) + 50.f);
-	_Window->draw(quitText);
-
+	_MenuList.Draw(_Window);
+	
 };

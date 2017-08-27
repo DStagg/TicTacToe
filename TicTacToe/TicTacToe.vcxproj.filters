@@ -48,6 +48,9 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MenuList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -78,6 +81,9 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuList.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

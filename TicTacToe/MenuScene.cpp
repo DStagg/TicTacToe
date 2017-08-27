@@ -12,7 +12,13 @@ MenuScene::~MenuScene()
 void MenuScene::Begin()
 {
 	_Font.loadFromFile("Roboto-Regular.ttf");
-	_MenuChoice = 0;
+
+	std::vector<std::string> list;
+	list.push_back("Play");
+	list.push_back("Config");
+	list.push_back("Quit");
+	_MenuList.Create(list, _Font, false, _Window->getSize().x / 2.f, _Window->getSize().y / 2.f, SFMLMenuList::Center);
+	_MenuList.SetBuffers(10.f, 50.f);
 
 	if (!_MenuMoveSFX.loadFromFile("MenuMove.wav"))
 		std::cout << "MenuMove.wav failed to load!" << std::endl;
@@ -56,20 +62,29 @@ void MenuScene::Update(float dt)
 			switch (Event.key.code)
 			{
 			case sf::Keyboard::Up:
-				_MenuChoice -= 1;
-				if (_MenuChoice < 0) _MenuChoice = 0;
+				_MenuList.DecChoice();
 				_Player.setBuffer(_MenuMoveSFX); 
 				break;
 			case sf::Keyboard::Down:
-				_MenuChoice += 1;
-				if (_MenuChoice > 2) _MenuChoice = 2;
+				_MenuList.IncChoice();
 				_Player.setBuffer(_MenuMoveSFX); 
 				break;
 			case sf::Keyboard::Return:
 				_Player.setBuffer(_MenuSelectSFX); 
-				if (_MenuChoice == 0) GetManager()->PushScene(new TTTScene(_Window));
-				else if (_MenuChoice == 1) GetManager()->PushScene(new ConfigScene(_Window, &_Music));
-				else if (_MenuChoice == 2) SetRunning(false);
+				switch (_MenuList.GetChoice())
+				{
+				case 0:
+					GetManager()->PushScene(new TTTScene(_Window));
+					break;
+				case 1:
+					GetManager()->PushScene(new ConfigScene(_Window, &_Music));
+					break;
+				case 2:
+					GetManager()->Quit(1);
+					break;
+				default:
+					break;
+				}
 				break;
 			default:
 				break;
@@ -87,25 +102,5 @@ void MenuScene::DrawScreen()
 	titleText.setPosition((_Window->getSize().x - titleText.getLocalBounds().width) / 2.f, titleText.getLocalBounds().height);
 	_Window->draw(titleText);
 
-	sf::Text playText;
-	playText.setString("Play");
-	playText.setFont(_Font);
-	if (_MenuChoice == 0) playText.setStyle(sf::Text::Underlined);
-	playText.setPosition((_Window->getSize().x - playText.getLocalBounds().width) / 2.f, _Window->getSize().y / 2.f);
-	_Window->draw(playText);
-
-	sf::Text configText;
-	configText.setString("Config");
-	configText.setFont(_Font);
-	if (_MenuChoice == 1) configText.setStyle(sf::Text::Underlined);
-	configText.setPosition((_Window->getSize().x - configText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) + 50.f);
-	_Window->draw(configText);
-
-	sf::Text quitText;
-	quitText.setString("Quit");
-	quitText.setFont(_Font);
-	if (_MenuChoice == 2) quitText.setStyle(sf::Text::Underlined);
-	quitText.setPosition((_Window->getSize().x - quitText.getLocalBounds().width) / 2.f, (_Window->getSize().y / 2.f) + 100.f);
-	_Window->draw(quitText);
-
+	_MenuList.Draw(_Window);
 };

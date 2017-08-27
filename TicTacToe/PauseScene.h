@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "TTTScene.h"
 #include "Config.h"
+#include "MenuList.h"
 
 class PauseScene : public Scene
 {
@@ -24,7 +25,8 @@ public:
 
 private:
 
-	int _MenuChoice;
+	SFMLMenuList _MenuList;
+
 	sf::RenderWindow* _Window;
 	sf::Font _Font;
 

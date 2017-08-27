@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include "Scene.h"
 #include "Config.h"
+#include "MenuList.h"
 
 class ConfigScene : public Scene
 {
@@ -23,7 +24,7 @@ public:
 private:
 
 	sf::RenderWindow* _Window;
-	int _MenuChoice;
+	SFMLMenuList _MenuList;
 	
 	sf::Music* _BackgroundMusic;
 

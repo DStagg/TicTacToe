@@ -10,6 +10,8 @@
 #include "Config.h"
 #include "ConfigScene.h"
 
+#include "MenuList.h"
+
 class MenuScene : public Scene
 {
 public:
@@ -28,7 +30,8 @@ private:
 
 	sf::Font _Font;
 	sf::RenderWindow* _Window;
-	int _MenuChoice;
+	
+	SFMLMenuList _MenuList;
 
 	sf::SoundBuffer _MenuMoveSFX;
 	sf::SoundBuffer _MenuSelectSFX;
