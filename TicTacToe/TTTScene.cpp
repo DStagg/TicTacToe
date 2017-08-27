@@ -14,9 +14,7 @@ void TTTScene::Begin()
 	_DelayTimer = 0.0f;
 	_PlayerTurn = true;
 
-	for (int x = 0; x < 3; x++)
-		for (int y = 0; y < 3; y++)
-			_Cells[x][y] = 0;
+	_Cells.Create(3, 3, 0);
 
 	sf::Color transparent(163, 73, 164);
 	sf::Image img;
@@ -66,7 +64,7 @@ void TTTScene::Update(float dt)
 {
 	_DelayTimer += dt;
 
-	if (_PlayerTurn)
+	if (_PlayerTurn || _Done)
 	{
 		sf::Event Event;
 		while (_Window->pollEvent(Event))
@@ -90,9 +88,9 @@ void TTTScene::Update(float dt)
 				if ((col < 0) || (col >= 3) || (row < 0) || (row >= 3))
 					break;
 
-				if (_Cells[col][row] == 0)
+				if (_Cells.GetCell(col,row) == 0)
 				{
-					_Cells[col][row] = (_PlayerTurn) ? 1 : 2;
+					_Cells.SetCell(col, row, (_PlayerTurn) ? 1 : 2);
 					_PlayerTurn = !_PlayerTurn;
 					_Player.setBuffer(_PlaceSFX);
 					if ((_Player.getStatus() != sf::Sound::Playing) && (Config::C()->_SFXOn)) _Player.play();
@@ -108,12 +106,14 @@ void TTTScene::Update(float dt)
 			}
 		}
 	}
-	else
+	else if ((_DelayTimer >= _TurnDelay)&&(!_Done))
 	{
 		//	Where the AI acts
-
-
-
+		_DelayTimer = 0.f;
+		_AI->TakeMove(&_Cells);
+		_PlayerTurn = !_PlayerTurn;
+		_Player.setBuffer(_PlaceSFX);
+		if ((_Player.getStatus() != sf::Sound::Playing) && (Config::C()->_SFXOn)) _Player.play();
 	}
 
 	if ((!_Done)&& (CheckForWin() != 0))
@@ -149,12 +149,12 @@ void TTTScene::DrawScreen()
 
 		for (int y = 0; y < 3; y++)
 		{
-			if (_Cells[x][y] == 0)
+			if (_Cells.GetCell(x,y) == 0)
 				continue;
 			sf::Sprite cellSprite;
 			cellSprite.setPosition((float)(_XMargin + (x * _X.getSize().x) + ((x + 1) * _XBuffer)),
 				(float)(_YMargin + (y * _X.getSize().y) + ((y + 1) * _YBuffer)));
-			if (_Cells[x][y] == 1)
+			if (_Cells.GetCell(x,y) == 1)
 				cellSprite.setTexture(_X);
 			else
 				cellSprite.setTexture(_O);
@@ -195,23 +195,23 @@ int TTTScene::CheckForWin()
 	{
 		for (int x = 0; x < 3; x++)
 		{
-			if ((_Cells[x][0] == check) && (_Cells[x][1] == check) && (_Cells[x][2] == check))
+			if ((_Cells.GetCell(x,0) == check) && (_Cells.GetCell(x,1) == check) && (_Cells.GetCell(x,2) == check))
 				return check;
 		}
 		for (int y = 0; y < 3; y++)
 		{
-			if ((_Cells[0][y] == check) && (_Cells[1][y] == check) && (_Cells[2][y] == check))
+			if ((_Cells.GetCell(0,y) == check) && (_Cells.GetCell(1,y) == check) && (_Cells.GetCell(2,y) == check))
 				return check;
 		}
-		if ((_Cells[0][0] == check) && (_Cells[1][1] == check) && (_Cells[2][2] == check))
+		if ((_Cells.GetCell(0,0) == check) && (_Cells.GetCell(1,1) == check) && (_Cells.GetCell(2,2) == check))
 			return check;
-		if ((_Cells[2][0] == check) && (_Cells[1][1] == check) && (_Cells[0][2] == check))
+		if ((_Cells.GetCell(2,0) == check) && (_Cells.GetCell(1,1) == check) && (_Cells.GetCell(0,2) == check))
 			return check;
 	}
 
 	for (int x = 0; x < 3; x++)
 		for (int y = 0; y < 3; y++)
-			if (_Cells[x][y] == 0)
+			if (_Cells.GetCell(x,y) == 0)
 				return 0;	//	Ongoing
 
 	return 3;	//	Draw
@@ -221,7 +221,7 @@ void TTTScene::Refresh()
 {
 	for (int x = 0; x < 3; x++)
 		for (int y = 0; y < 3; y++)
-			_Cells[x][y] = 0;
+			_Cells.SetCell(x,y,0);
 	_PlayerTurn = true;
 	_Done = false;
 };

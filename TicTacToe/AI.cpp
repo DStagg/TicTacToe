@@ -20,7 +20,7 @@ EasyAI::~EasyAI()
 
 };
 
-void EasyAI::TakeMove()
+void EasyAI::TakeMove(Grid* cells)
 {
-
+	cells->SetCell(1, 1, 2);
 };

@@ -8,6 +8,8 @@
 #include "Config.h"
 #include "AI.h"
 
+#include "Grid.h"
+
 class TTTScene : public Scene
 {
 public:
@@ -36,7 +38,7 @@ private:
 	sf::Texture _O;
 	sf::Font _Font;
 
-	int _Cells[3][3];
+	Grid _Cells;
 
 	int _XMargin = 100;
 	int _YMargin = 100;
