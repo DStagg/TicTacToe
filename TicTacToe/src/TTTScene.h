@@ -1,7 +1,10 @@
 #ifndef TTTSCENE_H
 #define TTTSCENE_H
-
-#include <SFML\Graphics.hpp>
+#include <sstream>
+#include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
+#include <SDL3_mixer/SDL_mixer.h>
+//#include <SFML\Graphics.hpp>
 #include "Utility.h"
 #include "Scene.h"
 #include "PauseScene.h"
@@ -14,7 +17,7 @@ class TTTScene : public Scene
 {
 public:
 
-	TTTScene(sf::RenderWindow* win = 0);
+	TTTScene(SDL_Renderer* win = nullptr, MIX_Mixer* mix = nullptr);
 	~TTTScene();
 
 	void Begin();
@@ -33,10 +36,14 @@ private:
 	float _TurnDelay = 0.5f;
 	bool _PlayerTurn;
 
-	sf::RenderWindow* _Window;
-	sf::Texture _X;
-	sf::Texture _O;
-	sf::Font _Font;
+	//sf::RenderWindow* _Window;
+	SDL_Renderer* _Window;
+	SDL_Texture* _Pieces;
+	SDL_FRect _X;
+	SDL_FRect _O;
+	//sf::Texture _X;
+	//sf::Texture _O;
+	//sf::Font _Font;
 
 	Grid _Cells;
 
@@ -45,14 +52,23 @@ private:
 	int _XBuffer = 10;
 	int _YBuffer = 10;
 
-	sf::SoundBuffer _PlaceSFX;
-	sf::SoundBuffer _VictorySFX;
-	sf::SoundBuffer _DrawSFX;
-	sf::Sound _Player;
+	//sf::SoundBuffer _PlaceSFX;
+	//sf::SoundBuffer _VictorySFX;
+	//sf::SoundBuffer _DrawSFX;
+	//sf::Sound _Player;
+	MIX_Audio* _PlaceSFX;
+	MIX_Audio* _VictorySFX;
+	MIX_Audio* _DrawSFX;
+	MIX_Audio* _Music;
+	MIX_Track* _MusicTrack;
+	MIX_Mixer* _Player;
 
 	bool _Done;
 
 	AI* _AI;
+
+	float _MouseX;
+	float _MouseY;
 
 };
 

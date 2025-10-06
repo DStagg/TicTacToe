@@ -1,8 +1,10 @@
 #ifndef MENULIST_H
 #define MENULIST_H
-
+#include <string>
 #include <vector>
-#include "SFML/Graphics.hpp"
+//#include "SFML/Graphics.hpp"
+#include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 class MenuList
 {
@@ -25,13 +27,13 @@ public:
 	std::string GetList(int id);
 	void SetList(int id, std::string text);
 
-private:
+protected:
 
 	int _Choice;
 	bool _Loop;
 	std::vector<std::string> _List;
 };
-
+/*
 class SFMLMenuList : public MenuList
 {
 public:
@@ -43,7 +45,7 @@ public:
 
 	void SetBuffers(float x, float y);
 
-	void Draw(sf::RenderWindow* rw);
+	void Draw(SDL_Renderer* renderer);
 
 	enum Orientation
 	{
@@ -58,6 +60,36 @@ private:
 	float _X, _Y;
 	sf::Font _Font;
 	int _Orientation;
+};
+*/
+
+class SDLMenuList : public MenuList
+{
+public:
+
+	SDLMenuList();
+	~SDLMenuList();
+
+	void Format(SDL_Renderer* renderer, TTF_Font* font, float x = 0.f, float y = 0.f, int orientation = SDLMenuList::Left);
+
+	void SetBuffers(float x, float y);
+
+	void Draw(SDL_Renderer* renderer);
+
+	enum Orientation
+	{
+		Left,
+		Center,
+		Right
+	};
+
+private:
+
+	float _XBuffer, _YBuffer;
+	float _X, _Y;
+	TTF_Font* _Font;
+	int _Orientation;
+	std::vector<SDL_Texture*> _Textures;
 };
 
 #endif

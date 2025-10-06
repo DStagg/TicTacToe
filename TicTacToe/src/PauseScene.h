@@ -1,8 +1,11 @@
 #ifndef PAUSESCENE_H
 #define PAUSESCENE_H
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+//#include <SFML/Graphics.hpp>
+//#include <SFML/Audio.hpp>
+#include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
+#include <SDL3_mixer/SDL_mixer.h>
 
 #include "Scene.h"
 #include "TTTScene.h"
@@ -13,7 +16,7 @@ class PauseScene : public Scene
 {
 public:
 
-	PauseScene(sf::RenderWindow* win = 0);
+	PauseScene(SDL_Renderer* win = nullptr, MIX_Mixer* mix = nullptr);
 	~PauseScene();
 
 	void Begin();
@@ -25,14 +28,19 @@ public:
 
 private:
 
-	SFMLMenuList _MenuList;
+	SDLMenuList _MenuList;
 
-	sf::RenderWindow* _Window;
-	sf::Font _Font;
+	SDL_Renderer* _Window;
+	//sf::Font _Font;
+	TTF_Font* _Font = nullptr;
+	SDL_Texture* _FontTex = nullptr;
 
-	sf::SoundBuffer _MenuMoveSFX;
-	sf::SoundBuffer _MenuSelectSFX;
-	sf::Sound _Player;
+	//sf::SoundBuffer _MenuMoveSFX;
+	//sf::SoundBuffer _MenuSelectSFX;
+	//sf::Sound _Player;
+	MIX_Audio* _MenuMoveSFX;
+	MIX_Audio* _MenuSelectSFX;
+	MIX_Mixer* _Player;
 };
 
 #endif
