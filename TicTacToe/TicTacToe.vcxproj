@@ -21,32 +21,32 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{69A9F25E-8005-4A47-8C03-D5C6B6309134}</ProjectGuid>
     <RootNamespace>TicTacToe</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -118,34 +118,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AI.cpp" />
-    <ClCompile Include="Config.cpp" />
-    <ClCompile Include="ConfigScene.cpp" />
-    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MenuList.cpp" />
-    <ClCompile Include="MenuScene.cpp" />
-    <ClCompile Include="PauseScene.cpp" />
-    <ClCompile Include="Random.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="TTTScene.cpp" />
-    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="src\AI.cpp" />
+    <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\ConfigScene.cpp" />
+    <ClCompile Include="src\Grid.cpp" />
+    <ClCompile Include="src\MenuList.cpp" />
+    <ClCompile Include="src\MenuScene.cpp" />
+    <ClCompile Include="src\PauseScene.cpp" />
+    <ClCompile Include="src\Random.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\TTTScene.cpp" />
+    <ClCompile Include="src\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AI.h" />
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="ConfigScene.h" />
-    <ClInclude Include="Grid.h" />
-    <ClInclude Include="MenuList.h" />
-    <ClInclude Include="MenuScene.h" />
-    <ClInclude Include="PauseScene.h" />
-    <ClInclude Include="Random.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="TTTScene.h" />
-    <ClInclude Include="Utility.h" />
+    <ClInclude Include="src\AI.h" />
+    <ClInclude Include="src\Config.h" />
+    <ClInclude Include="src\ConfigScene.h" />
+    <ClInclude Include="src\Grid.h" />
+    <ClInclude Include="src\MenuList.h" />
+    <ClInclude Include="src\MenuScene.h" />
+    <ClInclude Include="src\PauseScene.h" />
+    <ClInclude Include="src\Random.h" />
+    <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="src\TTTScene.h" />
+    <ClInclude Include="src\Utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Config.txt" />
     <Text Include="ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="res\Draw.wav" />
+    <Media Include="res\MenuMove.wav" />
+    <Media Include="res\MenuSelect.wav" />
+    <Media Include="res\Place.wav" />
+    <Media Include="res\Victory.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Paradox.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Pieces.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\Roboto-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
