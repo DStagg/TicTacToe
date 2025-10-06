@@ -1,1 +1,2 @@
+Swap SFML for SDL3
 Add Medium & Hard AI
