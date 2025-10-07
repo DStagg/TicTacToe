@@ -27,7 +27,6 @@ private:
 	SDL_Renderer* _Window;
 	SDLMenuList _MenuList;
 	
-
 	MIX_Audio* _MenuMoveSFX;
 	MIX_Audio* _MenuSelectSFX;
 	MIX_Track* _MusicTrack;

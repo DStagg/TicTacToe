@@ -91,7 +91,8 @@ SDLMenuList::SDLMenuList()
 };
 SDLMenuList::~SDLMenuList()
 {
-
+	for (int i = 0; i < (int)_Textures.size(); i++)
+		SDL_DestroyTexture(_Textures[i]);
 };
 
 void SDLMenuList::Format(SDL_Renderer* renderer, TTF_Font* font, float x, float y, int orientation)
@@ -155,3 +156,17 @@ void SDLMenuList::Draw(SDL_Renderer* renderer)
 		SDL_RenderTexture(renderer, _Textures[i], NULL, &dstrect);
 	};
 };
+
+void SDLMenuList::RedrawMenuItem(SDL_Renderer* renderer, int index, std::string msg)
+{
+	if ((index < 0) || (index >= CountList()) || (index >= (int)_Textures.size()))
+		return;
+
+	SDL_DestroyTexture(_Textures[index]);
+
+	SDL_Color color;
+	color.r = color.g = color.b = color.a = 255;
+	SDL_Surface* text = TTF_RenderText_Blended(_Font, msg.c_str(), 0, color);
+	_Textures[index] = SDL_CreateTextureFromSurface(renderer, text);
+	SDL_DestroySurface(text);
+}

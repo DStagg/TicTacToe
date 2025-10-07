@@ -21,20 +21,37 @@ void ConfigScene::Begin()
 	SDL_DestroySurface(text);
 
 	_MenuList.Populate({ "Music","SFX","AI","Quit" });
+	if (Config::C()->_MusicOn)
+		_MenuList.SetList(0, "Music: On");
+	else
+		_MenuList.SetList(0, "Music: Off");
+
+	if (Config::C()->_SFXOn)
+		_MenuList.SetList(1, "SFX: On");
+	else
+		_MenuList.SetList(1, "SFX: Off");
+
+	if (Config::C()->_AILvl == 0)
+		_MenuList.SetList(2, "AI: Easy");
+	else if (Config::C()->_AILvl == 1)
+		_MenuList.SetList(2, "AI: Medium");
+	else
+		_MenuList.SetList(2, "AI: Hard");
 	int w, h;
 	SDL_GetRenderOutputSize(_Window, &w, &h);
 	_MenuList.Format(_Window, _Font, (w / 2.f), (h / 2.f) - 100.f, SDLMenuList::Center);
 	_MenuList.SetBuffers(10.f, 50.f);
-	TTF_CloseFont(_Font);
-
+	
 	_MenuMoveSFX = MIX_LoadAudio(_Player, "res/MenuMove.wav", true);
 	if (!_MenuMoveSFX) std::cout << "MenuMove failed to load." << std::endl;
 	_MenuSelectSFX = MIX_LoadAudio(_Player, "res/MenuSelect.wav", true);
 	if (!_MenuSelectSFX) std::cout << "MenuSelect failed to load." << std::endl;
+
 };
 void ConfigScene::End()
 {
 	Config::C()->SaveToFile("Config.txt");
+	TTF_CloseFont(_Font);
 };
 void ConfigScene::Pause()
 {
@@ -73,14 +90,24 @@ void ConfigScene::Update(float dt)
 					Config::C()->_MusicOn = !Config::C()->_MusicOn;
 					if (Config::C()->_MusicOn) MIX_ResumeTrack(_MusicTrack);
 					else MIX_PauseTrack(_MusicTrack);
+					if (Config::C()->_MusicOn) _MenuList.SetList(0, "Music: On");
+					else _MenuList.SetList(0, "Music: Off");
+					_MenuList.RedrawMenuItem(_Window, 0, _MenuList.GetList(0));
 					break;
 				case 1:
 					Config::C()->_SFXOn = !Config::C()->_SFXOn;
 					if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _MenuSelectSFX);
+					if (Config::C()->_SFXOn) _MenuList.SetList(1, "SFX: On");
+					else _MenuList.SetList(1, "SFX: Off");
+					_MenuList.RedrawMenuItem(_Window, 1, _MenuList.GetList(1));
 					break;
 				case 2:
 					Config::C()->_AILvl = Config::C()->_AILvl + 1;
 					if (Config::C()->_AILvl > 2) Config::C()->_AILvl = 0;
+					if (Config::C()->_AILvl == 0) _MenuList.SetList(2, "AI: Easy");
+					else if (Config::C()->_AILvl == 1) _MenuList.SetList(2, "AI: Medium");
+					else _MenuList.SetList(2, "AI: Hard");
+					_MenuList.RedrawMenuItem(_Window, 2, _MenuList.GetList(2));
 					break;
 				case 3:
 					GetManager()->Quit(1);
@@ -93,23 +120,7 @@ void ConfigScene::Update(float dt)
 			}
 		}
 	}
-	// TODO: redraw menu text
-	if (Config::C()->_MusicOn)
-		_MenuList.SetList(0, "Music: On");
-	else
-		_MenuList.SetList(0, "Music: Off");
 
-	if (Config::C()->_SFXOn)
-		_MenuList.SetList(1, "SFX: On");
-	else
-		_MenuList.SetList(1, "SFX: Off");
-
-	if (Config::C()->_AILvl == 0)
-		_MenuList.SetList(2, "AI: Easy");
-	else if (Config::C()->_AILvl == 1)
-		_MenuList.SetList(2, "AI: Medium");
-	else
-		_MenuList.SetList(2, "AI: Hard");
 };
 void ConfigScene::DrawScreen()
 {

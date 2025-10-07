@@ -53,6 +53,8 @@ public:
 		Right
 	};
 
+	void RedrawMenuItem(SDL_Renderer* renderer, int index, std::string msg);
+
 private:
 
 	float _XBuffer, _YBuffer;

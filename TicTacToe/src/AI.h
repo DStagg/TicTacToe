@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "Random.h"
 #include "Grid.h"
 
