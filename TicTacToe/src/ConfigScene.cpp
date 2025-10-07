@@ -1,10 +1,11 @@
 #include "ConfigScene.h"
 
 //ConfigScene::ConfigScene(SDL_Renderer* win, sf::Music* bgm)
-ConfigScene::ConfigScene(SDL_Renderer* win, MIX_Mixer* mix)
+ConfigScene::ConfigScene(SDL_Renderer* win, MIX_Mixer* mix, MIX_Track* bgm)
 {
 	_Window = win;
 	_Player = mix;
+	_MusicTrack = bgm;
 };
 ConfigScene::~ConfigScene()
 {
@@ -35,11 +36,11 @@ void ConfigScene::Begin()
 	if (!_MenuMoveSFX) std::cout << "MenuMove failed to load." << std::endl;
 	_MenuSelectSFX = MIX_LoadAudio(_Player, "res/MenuSelect.wav", true);
 	if (!_MenuSelectSFX) std::cout << "MenuSelect failed to load." << std::endl;
-	_Music = MIX_LoadAudio(_Player, "res/Paradox.ogg", true);
-	if (!_Music) std::cout << "Music failed to load." << std::endl;
+	//_Music = MIX_LoadAudio(_Player, "res/Paradox.ogg", true);
+	//if (!_Music) std::cout << "Music failed to load." << std::endl;
 
-	MIX_SetTrackAudio(_MusicTrack, _Music);
-
+	//MIX_SetTrackAudio(_MusicTrack, _Music);
+	/*
 	if (Config::C()->_MusicOn)
 	{
 		SDL_PropertiesID options = SDL_CreateProperties();
@@ -48,7 +49,7 @@ void ConfigScene::Begin()
 		MIX_PlayTrack(_MusicTrack, options);
 		SDL_DestroyProperties(options);
 		//_Music.play();
-	}
+	}*/
 };
 void ConfigScene::End()
 {

@@ -15,7 +15,7 @@ class ConfigScene : public Scene
 public:
 
 	//ConfigScene(SDL_Renderer* win = nullptr, sf::Music* bgm = 0);
-	ConfigScene(SDL_Renderer* win = nullptr, MIX_Mixer* mix = nullptr);
+	ConfigScene(SDL_Renderer* win = nullptr, MIX_Mixer* mix = nullptr, MIX_Track* bgm = nullptr);
 	~ConfigScene();
 
 	void Begin();

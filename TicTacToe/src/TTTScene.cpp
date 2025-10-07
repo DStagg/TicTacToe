@@ -1,9 +1,10 @@
 #include "TTTScene.h"
 
-TTTScene::TTTScene(SDL_Renderer* win, MIX_Mixer* mix)
+TTTScene::TTTScene(SDL_Renderer* win, MIX_Mixer* mix, MIX_Track* bgm)
 {
 	_Window = win;
 	_Player = mix;
+	_MusicTrack = bgm;
 };
 TTTScene::~TTTScene()
 {
@@ -47,14 +48,14 @@ void TTTScene::Begin()
 	if (!_VictorySFX) std::cout << "Victory failed to load." << std::endl;
 	_DrawSFX = MIX_LoadAudio(_Player, "res/Draw.wav", true);
 	if (!_DrawSFX) std::cout << "Draw failed to load." << std::endl;
-	_Music = MIX_LoadAudio(_Player, "res/Paradox.ogg", true);
-	if (!_Music) std::cout << "Music failed to load." << std::endl;
+	//_Music = MIX_LoadAudio(_Player, "res/Paradox.ogg", true);
+	//if (!_Music) std::cout << "Music failed to load." << std::endl;
 	//int width = (_XMargin * 2) + (_XBuffer * 4) + (_X.getSize().x * 3 );
 	//int height = (_YMargin * 2) + (_YBuffer * 4) + (_X.getSize().y * 3);
 
-	_MusicTrack = MIX_CreateTrack(_Player);
-	MIX_SetTrackAudio(_MusicTrack, _Music);
-
+	//_MusicTrack = MIX_CreateTrack(_Player);
+	//MIX_SetTrackAudio(_MusicTrack, _Music);
+	/*
 	if (Config::C()->_MusicOn)
 	{
 		SDL_PropertiesID options = SDL_CreateProperties();
@@ -63,7 +64,7 @@ void TTTScene::Begin()
 		MIX_PlayTrack(_MusicTrack, options);
 		SDL_DestroyProperties(options);
 		//_Music.play();
-	}
+	}*/
 
 	_Done = false;
 
@@ -155,12 +156,12 @@ void TTTScene::Update(float dt)
 
 	if ((!_Done)&& (CheckForWin() != 0))
 	{
-		MIX_PauseTrack(_MusicTrack);
+		//MIX_PauseTrack(_MusicTrack);
 		//_Player.stop();
 		if (CheckForWin() == 3) MIX_PlayAudio(_Player, _DrawSFX);//_Player.setBuffer(_DrawSFX);
 		else MIX_PlayAudio(_Player, _VictorySFX); //_Player.setBuffer(_VictorySFX);
 		//if ( Config::C()->_SFXOn ) _Player.play();
-		MIX_ResumeTrack(_MusicTrack);
+		//MIX_ResumeTrack(_MusicTrack);
 		_Done = true;
 	}
 	

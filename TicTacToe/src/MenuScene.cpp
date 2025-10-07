@@ -55,15 +55,16 @@ void MenuScene::Begin()
 		std::cout << "Couldn't create music track: " << error << std::endl;
 	}
 
-	if (Config::C()->_MusicOn)
-	{
+	//if (Config::C()->_MusicOn)
+	//{
 		SDL_PropertiesID options = SDL_CreateProperties();
 		SDL_SetNumberProperty( options, MIX_PROP_PLAY_LOOPS_NUMBER, -1);
 		SDL_SetNumberProperty(options, MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER, 2000);
 		MIX_PlayTrack(_MusicTrack, options);
+		if (!Config::C()->_MusicOn) MIX_PauseTrack(_MusicTrack);
 		SDL_DestroyProperties(options);
 		//_Music.play();
-	}
+	//}
 };
 void MenuScene::End()
 {
@@ -72,14 +73,14 @@ void MenuScene::End()
 };
 void MenuScene::Pause()
 {
-	MIX_PauseTrack(_MusicTrack);
+	//MIX_PauseTrack(_MusicTrack);
 };
 void MenuScene::Resume()
 {
 	//if (!Config::C()->_MusicOn) _Music.stop();
 	//else if (_Music.getStatus() != sf::Music::Playing) _Music.play();
-	if (Config::C()->_MusicOn)
-		MIX_ResumeTrack(_MusicTrack);
+	//if (Config::C()->_MusicOn)
+	//	MIX_ResumeTrack(_MusicTrack);
 };
 void MenuScene::Update(float dt)
 {
@@ -118,10 +119,10 @@ void MenuScene::Update(float dt)
 				switch (_MenuList.GetChoice())
 				{
 				case 0:
-					GetManager()->PushScene(new TTTScene(_Window, _Player));
+					GetManager()->PushScene(new TTTScene(_Window, _Player, _MusicTrack));
 					break;
 				case 1:
-					GetManager()->PushScene(new ConfigScene(_Window, _Player));
+					GetManager()->PushScene(new ConfigScene(_Window, _Player, _MusicTrack));
 					break;
 				case 2:
 					GetManager()->Quit(1);

@@ -1,3 +1,3 @@
 Music: On
-SFX: Off
+SFX: On
 AI: Easy

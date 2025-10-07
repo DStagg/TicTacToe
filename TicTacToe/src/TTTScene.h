@@ -17,7 +17,7 @@ class TTTScene : public Scene
 {
 public:
 
-	TTTScene(SDL_Renderer* win = nullptr, MIX_Mixer* mix = nullptr);
+	TTTScene(SDL_Renderer* win = nullptr, MIX_Mixer* mix = nullptr, MIX_Track* bgm = nullptr);
 	~TTTScene();
 
 	void Begin();
