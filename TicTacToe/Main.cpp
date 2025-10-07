@@ -70,3 +70,6 @@ int main()
 
 	return SDL_APP_SUCCESS;
 }
+
+//	TODO: Add Medium AI
+//	TODO: Add Hard AI
