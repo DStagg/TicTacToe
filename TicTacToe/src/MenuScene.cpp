@@ -47,8 +47,13 @@ void MenuScene::Begin()
 	//if (!_Music.openFromFile("Paradox.ogg"))
 	//	std::cout << "Paradox.ogg failed to load!" << std::endl;
 	//_Music.setVolume(25.f);
+	_MusicTrack = MIX_CreateTrack(_Player);
 	
-	MIX_SetTrackAudio(_MusicTrack, _Music);
+	if (!MIX_SetTrackAudio(_MusicTrack, _Music))
+	{
+		const char* error = SDL_GetError();
+		std::cout << "Couldn't create music track: " << error << std::endl;
+	}
 
 	if (Config::C()->_MusicOn)
 	{

@@ -24,17 +24,25 @@ int main()
 	//sf::RenderWindow _Window;
 	//_Window.create(sf::VideoMode(624, 624), "Tic-Tac-Toe");
 	SDL_CreateWindowAndRenderer("Tic-Tac-Toe", 624, 624, NULL, &window, &renderer);
-	mixer = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL);
 
 	if (!TTF_Init())
 	{
 		std::cout << "Couldn't init SDL_TTF :" << SDL_GetError() << std::endl;
 		return SDL_APP_FAILURE;
 	}
-	if (!MIX_Init() || !mixer)
+	if (!MIX_Init())
 	{
 		const char* error = SDL_GetError();
 		std::cout << "Couldn't init SDL_Mixer :" << error << std::endl;
+		return SDL_APP_FAILURE;
+	}
+
+	mixer = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL);
+
+	if (!mixer)
+	{
+		const char* error = SDL_GetError();
+		std::cout << "Couldn't create mixer : " << error << std::endl;
 		return SDL_APP_FAILURE;
 	}
 
