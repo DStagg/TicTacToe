@@ -244,3 +244,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /TicTacToe/Config.txt
+/TicTacToe/ToDo.txt
