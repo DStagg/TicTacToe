@@ -65,7 +65,7 @@ void TTTScene::Begin()
 		SDL_DestroyProperties(options);
 		//_Music.play();
 	}*/
-
+	SDL_GetGlobalMouseState(&_MouseX, &_MouseY);
 	_Done = false;
 
 	_AI = new EasyAI();
@@ -114,7 +114,7 @@ void TTTScene::Update(float dt)
 				int row = (_MouseY - _YMargin) / (_YBuffer + _X.h);//(sf::Mouse::getPosition(*_Window).y - _YMargin) / (_YBuffer + _X.getSize().y);
 				
 
-				if ((col < 0) || (col >= 3) || (row < 0) || (row >= 3))
+				if ((_MouseX < _XMargin) || (_MouseY < _YMargin) || (col < 0) || (col >= 3) || (row < 0) || (row >= 3))
 					break;
 
 				if (_Cells.GetCell(col,row) == 0)
