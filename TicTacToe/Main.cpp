@@ -33,7 +33,8 @@ int main()
 	}
 	if (!MIX_Init() || !mixer)
 	{
-		std::cout << "Couldn't init SDL_Mixer :" << SDL_GetError() << std::endl;
+		const char* error = SDL_GetError();
+		std::cout << "Couldn't init SDL_Mixer :" << error << std::endl;
 		return SDL_APP_FAILURE;
 	}
 
