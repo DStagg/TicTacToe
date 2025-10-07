@@ -122,7 +122,7 @@ void TTTScene::Update(float dt)
 					_Cells.SetCell(col, row, (_PlayerTurn) ? 1 : 2);
 					_PlayerTurn = !_PlayerTurn;
 					//_Player.setBuffer(_PlaceSFX);
-					MIX_PlayAudio(_Player, _PlaceSFX);
+					if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _PlaceSFX);
 					//if ((_Player.getStatus() != sf::Sound::Playing) && (Config::C()->_SFXOn)) _Player.play();
 				}
 			}
@@ -149,7 +149,7 @@ void TTTScene::Update(float dt)
 		_DelayTimer = 0.f;
 		_AI->TakeMove(&_Cells);
 		_PlayerTurn = !_PlayerTurn;
-		MIX_PlayAudio(_Player, _PlaceSFX);
+		if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _PlaceSFX);
 		//_Player.setBuffer(_PlaceSFX);
 		//if ((_Player.getStatus() != sf::Sound::Playing) && (Config::C()->_SFXOn)) _Player.play();
 	}
@@ -158,8 +158,8 @@ void TTTScene::Update(float dt)
 	{
 		//MIX_PauseTrack(_MusicTrack);
 		//_Player.stop();
-		if (CheckForWin() == 3) MIX_PlayAudio(_Player, _DrawSFX);//_Player.setBuffer(_DrawSFX);
-		else MIX_PlayAudio(_Player, _VictorySFX); //_Player.setBuffer(_VictorySFX);
+		if (CheckForWin() == 3 && Config::C()->_SFXOn) MIX_PlayAudio(_Player, _DrawSFX);//_Player.setBuffer(_DrawSFX);
+		else if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _VictorySFX); //_Player.setBuffer(_VictorySFX);
 		//if ( Config::C()->_SFXOn ) _Player.play();
 		//MIX_ResumeTrack(_MusicTrack);
 		_Done = true;

@@ -71,18 +71,18 @@ void PauseScene::Update(float dt)
 			case SDLK_UP:
 				_MenuList.DecChoice();
 				//_Player.setBuffer(_MenuMoveSFX);
-				MIX_PlayAudio(_Player, _MenuMoveSFX);
+				if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _MenuMoveSFX);
 				break;
 			//case sf::Keyboard::Down:
 			case SDLK_DOWN:
 				_MenuList.IncChoice();
 				//_Player.setBuffer(_MenuMoveSFX);
-				MIX_PlayAudio(_Player, _MenuMoveSFX);
+				if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _MenuMoveSFX);
 				break;
 			//case sf::Keyboard::Return:
 			case SDLK_RETURN:
 				//_Player.setBuffer(_MenuSelectSFX);
-				MIX_PlayAudio(_Player, _MenuSelectSFX);
+				if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _MenuSelectSFX);
 				switch (_MenuList.GetChoice())
 				{
 				case 0:

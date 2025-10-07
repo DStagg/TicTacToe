@@ -85,18 +85,18 @@ void ConfigScene::Update(float dt)
 			case SDLK_UP:
 				_MenuList.DecChoice();
 				//_Player.setBuffer(_MenuMoveSFX);
-				MIX_PlayAudio(_Player, _MenuMoveSFX);
+				if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _MenuMoveSFX);
 				break;
 			//case sf::Keyboard::Down:
 			case SDLK_DOWN:
 				_MenuList.IncChoice();
 				//_Player.setBuffer(_MenuMoveSFX);
-				MIX_PlayAudio(_Player, _MenuMoveSFX);
+				if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _MenuMoveSFX);
 				break;
 			//case sf::Keyboard::Return:
 			case SDLK_RETURN:
 				//_Player.setBuffer(_MenuSelectSFX);
-				MIX_PlayAudio(_Player, _MenuSelectSFX);
+				if (Config::C()->_SFXOn && _MenuList.GetChoice() != 1) MIX_PlayAudio(_Player, _MenuSelectSFX);
 				switch (_MenuList.GetChoice())
 				{
 				case 0:
@@ -110,6 +110,7 @@ void ConfigScene::Update(float dt)
 					break;
 				case 1:
 					Config::C()->_SFXOn = !Config::C()->_SFXOn;
+					if (Config::C()->_SFXOn) MIX_PlayAudio(_Player, _MenuSelectSFX);
 					break;
 				case 2:
 					Config::C()->_AILvl = Config::C()->_AILvl + 1;
@@ -128,7 +129,7 @@ void ConfigScene::Update(float dt)
 			//	_Player.play();
 		}
 	}
-
+	// TODO: redraw menu text
 	if (Config::C()->_MusicOn)
 		_MenuList.SetList(0, "Music: On");
 	else
