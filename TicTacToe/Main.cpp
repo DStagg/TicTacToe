@@ -1,4 +1,3 @@
-//#include <SFML/Graphics.hpp>
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <SDL3_mixer/SDL_mixer.h>
@@ -16,13 +15,9 @@ MIX_Mixer* mixer = nullptr;
 
 int main()
 {
-	//int FramesPerSecond = 60;
-	//float deltaT = 0.f;
-	//sf::Clock UpdateClock;
+	
 	Timer UpdateClock;
 
-	//sf::RenderWindow _Window;
-	//_Window.create(sf::VideoMode(624, 624), "Tic-Tac-Toe");
 	SDL_CreateWindowAndRenderer("Tic-Tac-Toe", 624, 624, NULL, &window, &renderer);
 
 	if (!TTF_Init())
@@ -47,20 +42,17 @@ int main()
 	}
 
 	SceneManager SCM;
-	//SCM.PushScene(new MenuScene(&_Window));
+
 	SCM.PushScene(new MenuScene(renderer,mixer));
-	
-	//UpdateClock.restart();
+
 	UpdateClock.Reset();
 	while (SCM.GetActiveScenePntr() != 0)
 	{
-		//SCM.GetActiveScenePntr()->Update(UpdateClock.restart().asSeconds());
 		SCM.GetActiveScenePntr()->Update(UpdateClock.Lap() / 1000.f);
-		//_Window.clear();
+
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 		SCM.GetActiveScenePntr()->DrawScreen();
-		//_Window.display();
 		SDL_RenderPresent(renderer);
 		SCM.CullScenes();
 	}

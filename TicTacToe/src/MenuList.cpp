@@ -85,52 +85,6 @@ void MenuList::SetList(int id, std::string tex)
 	_List[id] = tex;
 };
 
-///
-/*
-SFMLMenuList::SFMLMenuList()
-{
-	
-};
-SFMLMenuList::~SFMLMenuList()
-{
-
-};
-
-void SFMLMenuList::Format(sf::Font font, float x, float y, int orientation)
-{
-	_Font = font;
-	_X = x;
-	_Y = y;
-	_Orientation = orientation;
-}
-
-void SFMLMenuList::SetBuffers(float x, float y)
-{
-	_XBuffer = x;
-	_YBuffer = y;
-};
-
-void SFMLMenuList::Draw(sf::RenderWindow* rw)
-{
-	for (int i = 0; i < CountList(); i++)
-	{
-		sf::Text tex;
-		tex.setString(GetList(i));
-		tex.setFont(_Font);
-		if (i == GetChoice())
-			tex.setStyle(sf::Text::Underlined);
-		
-		if (_Orientation == SFMLMenuList::Left)
-			tex.setPosition(_X + _XBuffer, _Y + (i * _YBuffer));
-		else if (_Orientation == SFMLMenuList::Center)
-			tex.setPosition(_X - (tex.getLocalBounds().width / 2.f), _Y + (i * _YBuffer));
-		else
-			tex.setPosition(_X - (tex.getLocalBounds().width + _XBuffer), _Y + (i * _YBuffer));
-
-		rw->draw(tex);
-	};
-};
-*/
 SDLMenuList::SDLMenuList()
 {
 

@@ -4,7 +4,6 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_mixer/SDL_mixer.h>
-//#include <SFML\Graphics.hpp>
 #include "Utility.h"
 #include "Scene.h"
 #include "PauseScene.h"
@@ -36,14 +35,10 @@ private:
 	float _TurnDelay = 0.5f;
 	bool _PlayerTurn;
 
-	//sf::RenderWindow* _Window;
 	SDL_Renderer* _Window;
 	SDL_Texture* _Pieces;
 	SDL_FRect _X;
 	SDL_FRect _O;
-	//sf::Texture _X;
-	//sf::Texture _O;
-	//sf::Font _Font;
 
 	Grid _Cells;
 
@@ -52,14 +47,9 @@ private:
 	int _XBuffer = 10;
 	int _YBuffer = 10;
 
-	//sf::SoundBuffer _PlaceSFX;
-	//sf::SoundBuffer _VictorySFX;
-	//sf::SoundBuffer _DrawSFX;
-	//sf::Sound _Player;
 	MIX_Audio* _PlaceSFX;
 	MIX_Audio* _VictorySFX;
 	MIX_Audio* _DrawSFX;
-	MIX_Audio* _Music;
 	MIX_Track* _MusicTrack;
 	MIX_Mixer* _Player;
 

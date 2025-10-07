@@ -2,7 +2,6 @@
 #define MENULIST_H
 #include <string>
 #include <vector>
-//#include "SFML/Graphics.hpp"
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
@@ -33,35 +32,6 @@ protected:
 	bool _Loop;
 	std::vector<std::string> _List;
 };
-/*
-class SFMLMenuList : public MenuList
-{
-public:
-
-	SFMLMenuList();
-	~SFMLMenuList();
-
-	void Format(sf::Font font, float x = 0.f, float y = 0.f, int orientation = SFMLMenuList::Left);
-
-	void SetBuffers(float x, float y);
-
-	void Draw(SDL_Renderer* renderer);
-
-	enum Orientation
-	{
-		Left,
-		Center,
-		Right
-	};
-
-private:
-
-	float _XBuffer, _YBuffer;
-	float _X, _Y;
-	sf::Font _Font;
-	int _Orientation;
-};
-*/
 
 class SDLMenuList : public MenuList
 {
