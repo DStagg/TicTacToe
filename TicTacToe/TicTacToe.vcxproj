@@ -75,7 +75,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Cpp\Offline\SDL_mixer\include;C:\Cpp\Offline\SDL_ttf\include;C:\Cpp\Offline\SDL_image\include;C:\Cpp\Offline\SDL\include;C:\Users\User\Documents\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_DEBUG_</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Users\User\Documents\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Cpp\Offline\SDL_mixer\include;C:\Cpp\Offline\SDL_ttf\include;C:\Cpp\Offline\SDL_image\include;C:\Cpp\Offline\SDL\include;</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_DEBUG_</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
@@ -104,7 +104,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Cpp\Offline\SDL_mixer\include;C:\Cpp\Offline\SDL_ttf\include;C:\Cpp\Offline\SDL_image\include;C:\Cpp\Offline\SDL\include;C:\Users\User\Documents\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_RELEASE_</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -124,7 +124,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Cpp\Offline\SDL_mixer\include;C:\Cpp\Offline\SDL_ttf\include;C:\Cpp\Offline\SDL_image\include;C:\Cpp\Offline\SDL\include;</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_RELEASE_</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
