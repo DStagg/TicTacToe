@@ -1,5 +1,5 @@
-#ifndef CONFIGSCENE_H
-#define CONFIGSCENE_H
+#pragma once
+
 #include <iostream>
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
@@ -36,5 +36,3 @@ private:
 	TTF_Font* _Font = nullptr;
 	SDL_Texture* _FontTex = nullptr;
 };
-
-#endif

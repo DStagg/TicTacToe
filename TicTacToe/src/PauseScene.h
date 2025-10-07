@@ -1,5 +1,4 @@
-#ifndef PAUSESCENE_H
-#define PAUSESCENE_H
+#pragma once
 
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
@@ -36,5 +35,3 @@ private:
 	MIX_Audio* _MenuSelectSFX;
 	MIX_Mixer* _Player;
 };
-
-#endif

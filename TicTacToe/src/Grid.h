@@ -1,5 +1,5 @@
-#ifndef GRID_H
-#define GRID_H
+#pragma once
+
 
 #include <vector>
 
@@ -24,5 +24,3 @@ private:
 	std::vector<std::vector<int>> _Cells;
 	
 };
-
-#endif

@@ -1,5 +1,5 @@
-#ifndef MENUSCENE_H
-#define MENUSCENE_H
+#pragma once
+
 
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
@@ -41,5 +41,3 @@ private:
 	MIX_Track* _MusicTrack;
 	MIX_Mixer* _Player;
 };
-
-#endif

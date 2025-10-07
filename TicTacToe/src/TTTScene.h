@@ -1,5 +1,5 @@
-#ifndef TTTSCENE_H
-#define TTTSCENE_H
+#pragma once
+
 #include <sstream>
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -61,5 +61,3 @@ private:
 	float _MouseY;
 
 };
-
-#endif

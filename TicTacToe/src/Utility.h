@@ -1,5 +1,4 @@
-#ifndef UTILITY_H
-#define UTILITY_H
+#pragma once
 
 #define Pi 3.14159265358979323846264f
 
@@ -82,5 +81,3 @@ T Abs(T a)
 		return -a;
 	return a;
 };
-
-#endif

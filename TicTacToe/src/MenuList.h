@@ -1,5 +1,5 @@
-#ifndef MENULIST_H
-#define MENULIST_H
+#pragma once
+
 #include <string>
 #include <vector>
 #include <SDL3/SDL.h>
@@ -61,5 +61,3 @@ private:
 	int _Orientation;
 	std::vector<SDL_Texture*> _Textures;
 };
-
-#endif

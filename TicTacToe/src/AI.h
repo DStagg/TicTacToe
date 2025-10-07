@@ -1,5 +1,5 @@
-#ifndef AI_H
-#define AI_H
+#pragma once
+
 
 #include "Random.h"
 #include "Grid.h"
@@ -24,5 +24,3 @@ public:
 	void TakeMove(Grid* cells);
 
 };
-
-#endif
