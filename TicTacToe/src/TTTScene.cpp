@@ -52,6 +52,7 @@ void TTTScene::Begin()
 	//int width = (_XMargin * 2) + (_XBuffer * 4) + (_X.getSize().x * 3 );
 	//int height = (_YMargin * 2) + (_YBuffer * 4) + (_X.getSize().y * 3);
 
+	_MusicTrack = MIX_CreateTrack(_Player);
 	MIX_SetTrackAudio(_MusicTrack, _Music);
 
 	if (Config::C()->_MusicOn)
@@ -70,7 +71,7 @@ void TTTScene::Begin()
 };
 void TTTScene::End()
 {
-
+	MIX_StopTrack(_MusicTrack, 0);
 };
 void TTTScene::Pause()
 {
