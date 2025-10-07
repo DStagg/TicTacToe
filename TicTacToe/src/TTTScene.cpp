@@ -72,7 +72,7 @@ void TTTScene::Begin()
 };
 void TTTScene::End()
 {
-	MIX_StopTrack(_MusicTrack, 0);
+	//MIX_StopTrack(_MusicTrack, 0);
 };
 void TTTScene::Pause()
 {
